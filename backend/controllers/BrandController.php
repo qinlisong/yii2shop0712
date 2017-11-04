@@ -52,7 +52,7 @@ class BrandController extends \yii\web\Controller
            //验证
            if($brand->validate()){
 //               echo 11;exit;
-               //保存图片
+               //绑定图片到数据库
                $brand->logo=$filePath;
                $brand->save(false);
                //跳转
@@ -115,5 +115,20 @@ class BrandController extends \yii\web\Controller
         $brand->delete();
         //跳转
         return $this->redirect(['brand/index']);
+    }
+
+    public function actionHy($id)
+    {
+        $brand = Brand::findOne($id);
+        if ($brand->status == -1) {
+            $brand->save(false);
+            echo \Yii::$app->session->setFlash("删除不成工");
+
+            return $this->redirect(['brand/index']);
+        } else {
+            echo 111;
+        }
+
+
     }
 }

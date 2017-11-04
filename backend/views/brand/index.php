@@ -1,4 +1,4 @@
-<h1>品牌列表</h1>
+<h1 align="center">品牌列表</h1>
 <table class="table">
     <?PHP echo \yii\bootstrap\Html::a("添加数据",['add'],['class'=>'btn btn-success'])?>
     <tr>
@@ -25,7 +25,7 @@
         <td>
             <?php
             echo \yii\bootstrap\Html::a("编辑",['brand/edit','id'=>$brand->id],["class"=>"btn btn-warning"]);
-            echo \yii\bootstrap\Html::a("删除",['brand/del','id'=>$brand->id],["class"=>"btn btn-danger"]);
+            echo \yii\bootstrap\Html::a("删除",['brand/hy','id'=>$brand->id],["class"=>"btn btn-danger"]);
 
 
             ?>
