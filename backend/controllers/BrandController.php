@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use backend\models\Brand;
 use yii\data\Pagination;
+use yii\helpers\Json;
 use yii\web\Request;
 use yii\web\UploadedFile;
 use flyok666\qiniu\Qiniu;
@@ -158,6 +159,7 @@ $url = $qiniu->getLink($key);
       'url'=>$url,
       'attachment'=>$url
   ];
+
   exit(Json::encode($info));//这一步出错
     }
 }
