@@ -37,6 +37,7 @@ class BrandController extends \yii\web\Controller
     {
         //创建一个接收的模型
         $brand=new Brand();
+//       var_dump($brand->getErrors());exit;
        $brand-> status=1;
        //判断是否是post提交
         $request=new Request();
@@ -55,8 +56,9 @@ class BrandController extends \yii\web\Controller
 //               echo 11;exit;
                //绑定图片到数据库
 //               $brand->logo=$filePath;
-               $brand->save(false);
+               $brand->save();
                //跳转
+
                return $this->redirect(['index']);
            }else{
                $brand->getErrors();
@@ -80,6 +82,7 @@ class BrandController extends \yii\web\Controller
         $request=new Request();
 //        绑定数据
         if($brand->load($request->post())){
+//            var_dump($brand);exit;
 //            //图片上传
 //            $brand->imgFile=UploadedFile::getInstance($brand,"imgFile");
 //            //拼路径
@@ -93,7 +96,7 @@ class BrandController extends \yii\web\Controller
 //               echo 11;exit;
                 //保存图片
 //                $brand->logo=$filePath;
-                $brand->save(false);
+                $brand->save();
                 //跳转
                 return $this->redirect(['brand/index']);
             }else{
@@ -123,13 +126,13 @@ class BrandController extends \yii\web\Controller
         $brand = Brand::findOne($id);
         if ($brand->status == -1) {
             $brand->save(false);
-            echo \Yii::$app->session->setFlash("删除不成工");
+            echo \Yii::$app->session->setFlash("删除不成功");
 
             return $this->redirect(['brand/index']);
         } else {
-            echo 111;
+            $brand->delete();
         }
-
+        return $this->redirect(['brand/index']);
 
     }
 

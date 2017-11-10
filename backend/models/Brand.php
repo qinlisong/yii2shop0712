@@ -36,8 +36,8 @@ class Brand extends \yii\db\ActiveRecord
             [['sort', 'status'], 'integer'],
             [['name'], 'string', 'max' => 30],
             [['intro'], 'string', 'max' => 255],
-//            [['logo'], 'string', 'max' => 100],
-           [['imgFile'],'file','extensions' => ['jpg','png','gif'],'skipOnEmpty' => false]
+            [['logo'],'safe'],
+//           [['imgFile'],'file','extensions' => ['jpg','png','gif'],'skipOnEmpty' => false]
         ];
     }
 
@@ -55,5 +55,17 @@ class Brand extends \yii\db\ActiveRecord
             'status' => '状态',
             'imgFile'=>'图片'
         ];
+    }
+
+    public function getImage()
+    {
+        if(substr($this->logo,0,7)=="http://"){
+          //  echo 1;exit;
+         //   echo $this->logo;
+            return $this->logo;
+        }else{
+            return "@web/".$this->logo;
+        }
+
     }
 }
