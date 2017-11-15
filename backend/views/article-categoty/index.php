@@ -1,3 +1,4 @@
+<h1 align="center">分类列表</h1>
 <?php echo \yii\bootstrap\Html::a("添加分类",['add'],['class'=>'btn btn-info'])?>
 <table class="table">
     <tr>

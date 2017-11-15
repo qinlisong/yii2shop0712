@@ -1,4 +1,4 @@
-
+<h1 align="center">商品列表</h1>
 <?php
 use \yii\widgets\LinkPager;
 ?>

@@ -1,3 +1,4 @@
+<h1 align="center">文章列表</h1>
 <table class="table">
     <?php
     echo \yii\bootstrap\Html::a("添加数据",['add'],['class'=>'btn btn-info']);

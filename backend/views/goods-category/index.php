@@ -1,5 +1,5 @@
 
-<h1 align="center">分类列表</h1>>
+<h1 align="center">商品分类列表</h1>>
 <?php
 use leandrogehlen\treegrid\TreeGrid;
 ?>
