@@ -51,4 +51,6 @@ class ArticleCategoty extends \yii\db\ActiveRecord
             'type' => '类型',
         ];
     }
+
+
 }
