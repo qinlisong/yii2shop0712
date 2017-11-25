@@ -83,5 +83,5 @@ return [
         ],
     ],
     'params' => $params,
-    'name'=>'京西商城'
+    'name'=>'范特西商城'
 ];

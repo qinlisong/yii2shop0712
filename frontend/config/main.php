@@ -15,6 +15,9 @@ return [
         'request' => [
             'csrfParam' => '_csrf-frontend',
         ],
+        'cart'=>[
+            'class'=>\frontend\components\Cart::className(),
+        ],
         'user' => [
             'identityClass' =>\frontend\models\Member::className(),
             'enableAutoLogin' => true,

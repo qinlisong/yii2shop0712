@@ -9,6 +9,7 @@
 namespace frontend\controllers;
 
 
+use frontend\models\Cart;
 use frontend\models\LoginForm;
 use frontend\models\Member;
 use Mrgoon\AliSms\AliSms;
@@ -83,6 +84,8 @@ class MemberController extends Controller
                     //存在判断密码
                     if (\Yii::$app->security->validatePassword($member->password, $admin->password)) {
                         \Yii::$app->user->login($admin);
+                        //处理购物车同步数据
+                        (new \frontend\components\Cart())->synDb()->flush()->save();
                         $admin->save();
                           //跳转
                         return $this->redirect(['index']);
@@ -117,5 +120,11 @@ class MemberController extends Controller
 
 
 
+    }
+
+    public function actionLogout()
+    {
+        \Yii::$app->user->logout();
+        return $this->redirect(['login']);
     }
 }

@@ -50,14 +50,15 @@
         <tbody>
 
         <input type="hidden" value="<?=Yii::$app->request->csrfToken?>" id="csrf">
-        <?php foreach ($goods as $good):?>
 
-<!--            --><?//= var_dump($good);exit?>
-            <tr >
+<!--        --><?php //var_dump($goods);exit();?>
+        <?php foreach($goods as $good):?>
+            <tr id="<?=$good['id']?>">
 
                 <td class="col1">
                     <!-- <a href="/"><img src="/images/cart_goods1.jpg" alt="" /></a>-->
                     <?=\yii\helpers\Html::a(\yii\helpers\Html::img($good['logo']),['detail','id'=>$good['id']])?>
+
                     <strong>
                         <!-- <a href="/">【1111购物狂欢节】惠JackJones杰克琼斯纯羊毛菱形格</a>-->
                         <?=\yii\helpers\Html::a($good['name'],['detail','id'=>$good['id']])?>
@@ -69,7 +70,7 @@
                     <a href="javascript:;" class="add_num"></a>
                 </td>
                 <td class="col5">￥<span><?=$good['shop_price']*$good['num']?></span></td>
-                <td class="col6"><a href="/">删除</a></td>
+                <td class="col6"><a href="javascript:;" class="btn_del">删除</a></td>
             </tr>
         <?php endforeach;?>
         </tbody>
@@ -118,12 +119,31 @@
 
 
 <script>
-    //总计金额
-    var total = 0;
-    $(".col5 span").each(function(){
-        total += parseFloat($(this).text());
+    function total() {
+        //总计金额
+        var total = 0;
+        $(".col5 span").each(function(){
+            total += parseFloat($(this).text());
+        });
+        $("#total").text(total.toFixed(2));
+    }
+    total();
+   $(function () {
+//        //删除操作
+        $(".btn_del").click(function () {
+            //1.Ajax提交
+            var tr=$(this).parent().parent();
+            var id=tr.attr('id');
+            $.post("<?=\yii\helpers\Url::to(['ajax','type'=>'del'])?>",{id:id,"_csrf-frontend":$("#csrf").val()},function (data) {
+                //删除成功
+                if (data = "success") {
+                    //删除当前TR
+                    tr.remove();
+                    total();
+                }
+            })
+        });
     });
-    $("#total").text(total.toFixed(2));
-</script>>
+</script>
 </body>
 </html>
